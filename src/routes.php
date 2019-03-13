@@ -45,7 +45,24 @@ $app->group("/fe-server/v1", function(\Slim\App $app){
         $see = new See($usuario, $clave, $body["test"] = "true");
         $result["response"] = $see->enviar($data);
         if($result["response"]["success"]){
-            $db->save($data, $dataB64, $result["uuid"]);
+            $row = [
+                "tipo_comprobante" => $data->cabecera->tipo_documento,
+                "fecha" => $data->cabecera->fecha_emision,
+                "serie" => $data->cabecera->serie,
+                "numero" => $data->cabecera->numero,
+                "ruc" => $data->receptor->ruc,
+                "moneda" => $data->cabecera->tipo_moneda,
+                "base" => $data->cabecera->operaciones_gravadas,
+                "igv" => $data->cabecera->igv,
+                "servicio" => 0,
+                "total" => $data->cabecera->importe_total,
+                "data" => $dataB64,
+                "uuid" => $result["uuid"]
+            ];
+            if($data->cabecera->servicio > 0){
+                $row["servicio"] = $data->cabecera->servicio;
+            }
+            $db->save($row);
         }
 
         return $response->withJson($result);
@@ -97,5 +114,47 @@ $app->group("/fe-server/v1", function(\Slim\App $app){
         return $response->write($data);    
     });
 
+});
+
+$app->group("/dogia-server/v1", function(\Slim\App $app){
+
+    $app->get('/', function(Request $request, Response $response, $args){
+        return $response->withJson(array("success" => true));
+    });
+
+    $app->post('/comprobante', function(Request $request, Response $response, $args) {
+        $result = array("success" => true, "response" => null);
+        $db = new Db($this->db, $this->logger);
+        //
+        $body = $request->getParsedBody();
+        $dataB64 = $body["data"];
+        $data = json_decode(base64_decode($dataB64));
+        //
+        $doc = isset($data->factura) ? $data->factura : $data->boleta;
+        //
+        $row = [
+            "sede" => $doc->EMI->codigoAsigSUNAT,
+            "tipo_comprobante" => $doc->IDE->codTipoDocumento,
+            "fecha" => $doc->IDE->fechaEmision . " " . $doc->IDE->horaEmision,
+            "serie" => explode("-", $doc->IDE->numeracion)[0],
+            "numero" => explode("-", $doc->IDE->numeracion)[1],
+            "ruc" => $doc->REC->numeroDocId,
+            "moneda" => $doc->IDE->tipoMoneda,
+            "base" => $doc->CAB->gravadas->totalVentas,
+            "igv" => $doc->CAB->montoTotalImpuestos,
+            "servicio" => $doc->CAB->inafectas->totalVentas,
+            "total" => $doc->CAB->importeTotal,
+            "data" => $dataB64
+        ];
+        //$result["response"] = $db->existe($row["sede"], $row["tipo_comprobante"], $row["serie"], $row["numero"]);
+        if(!$db->existe($row["sede"], $row["tipo_comprobante"], $row["serie"], $row["numero"])){
+            $id = $db->save($row);
+            $result["response"] = array("id" => $id);
+        }else{
+            $result["response"] = array("id" => 0, "message" => "El comprobante existe");
+        }
+        //
+        return $response->withJson($result);
+    });
 
 });
