@@ -1,6 +1,6 @@
 <?PHP
 
-namespace Lib;
+namespace Sunat\Lib;
 
 use Greenter\XMLSecLibs\Certificate\X509Certificate;
 use Greenter\XMLSecLibs\Certificate\X509ContentType;

@@ -1,6 +1,6 @@
 <?PHP
 
-namespace Lib;
+namespace Sunat\Lib;
 
 class File {
 

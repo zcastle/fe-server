@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib;
+namespace Sunat\Lib;
 
 use Greenter\Model\Sale\Note;
 use Greenter\Model\Sale\SaleDetail;
@@ -8,9 +8,9 @@ use Greenter\Model\Sale\Legend;
 use Greenter\Model\Company\Address;
 use Greenter\Model\Client\Client;
 //
-use Lib\See;
-use Lib\Base;
-use Lib\NumberToLetterConverter;
+use Sunat\Lib\See;
+use Sunat\Lib\Base;
+use Sunat\Lib\NumberToLetterConverter;
 
 class Nota extends Base {
 

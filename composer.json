@@ -29,7 +29,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Lib\\": "src/lib/"
+            "Reloj\\": "src/reloj/",
+            "Comprobante\\": "src/comprobante/",
+            "Sunat\\": "src/sunat/"
         }
     },
     "require-dev": {

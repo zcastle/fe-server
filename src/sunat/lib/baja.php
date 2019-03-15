@@ -1,11 +1,11 @@
 <?php
 
-namespace Lib;
+namespace Sunat\Lib;
 
 use Greenter\Model\Voided\Voided;
 use Greenter\Model\Voided\VoidedDetail;
 
-use Lib\Base;
+use Sunat\Lib\Base;
 
 class Baja extends Base {
 

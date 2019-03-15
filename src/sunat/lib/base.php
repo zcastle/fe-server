@@ -1,6 +1,6 @@
 <?php
 
-namespace Lib;
+namespace Sunat\Lib;
 
 use Greenter\Model\Company\Address;
 use Greenter\Model\Company\Company;

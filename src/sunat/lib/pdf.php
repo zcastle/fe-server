@@ -1,12 +1,12 @@
 <?php
 
-namespace Lib;
+namespace Sunat\Lib;
 
 use Greenter\Model\DocumentInterface;
 use Greenter\Report\HtmlReport;
 use Greenter\Report\PdfReport;
 
-use Lib\File;
+use Sunat\Lib\File;
 
 class Pdf {
 

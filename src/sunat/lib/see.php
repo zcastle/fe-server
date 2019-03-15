@@ -1,20 +1,20 @@
 <?PHP
 
-namespace Lib;
+namespace Sunat\Lib;
 
 use Greenter\Ws\Services\SunatEndpoints;
 //
 use Greenter\Validator\SymfonyValidator;
 use Greenter\Ubl\UblValidator;
 //
-use Lib\Factura;
-use Lib\Nota;
-use Lib\Baja;
-use Lib\ResumenDiario;
+use Sunat\Lib\Factura;
+use Sunat\Lib\Nota;
+use Sunat\Lib\Baja;
+use Sunat\Lib\ResumenDiario;
 //
-use Lib\File;
-use Lib\SeeUtil;
-use Lib\Pdf;
+use Sunat\Lib\File;
+use Sunat\Lib\SeeUtil;
+use Sunat\Lib\Pdf;
 
 class See {
 

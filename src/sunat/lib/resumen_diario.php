@@ -1,11 +1,11 @@
 <?php
 
-namespace Lib;
+namespace Sunat\Lib;
 
 use Greenter\Model\Summary\Summary;
 use Greenter\Model\Summary\SummaryDetail;
 //
-use Lib\See;
+use Sunat\Lib\See;
 
 class ResumenDiario {
 
