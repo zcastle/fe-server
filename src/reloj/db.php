@@ -12,11 +12,12 @@ class Db {
     $this->logger = $logger;
   }
 
-  public function insertarRegistro($codigo, $reloj_serie, $fecha_hora){
+  public function insertarRegistro($row){
     $this->db->table('marcacion')->insert([
-      "codigo" => $codigo,
-      "reloj_serie" => $reloj_serie,
-      "fecha_hora" => $fecha_hora
+      "codigo" => $row->codigo,
+      "reloj_serie" => $row->reloj_serie,
+      "estado" => $row->estado,
+      "fecha_hora" => $row->fecha_hora
     ]);
   }
 }

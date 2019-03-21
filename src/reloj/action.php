@@ -22,7 +22,7 @@ class Action {
 
             $db = new Db($this->container->get("db"), $this->container->get("logger"));
             foreach($rows AS $row){
-                $db->insertarRegistro($row->codigo, $row->reloj_serie, $row->fecha_hora);
+                $db->insertarRegistro($row);
             }
         }else{
             $result["error"] = true;
